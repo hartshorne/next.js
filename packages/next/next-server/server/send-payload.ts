@@ -66,7 +66,7 @@ export function sendPayload(
     )
   }
   res.setHeader('Content-Length', Buffer.byteLength(payload))
-  if (options != null) {
+  if (options != null && !res.getHeader('Cache-Control')) {
     setRevalidateHeaders(res, options)
   }
   res.end(req.method === 'HEAD' ? null : payload)
